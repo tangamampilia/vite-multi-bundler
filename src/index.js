@@ -20,10 +20,12 @@ export default function multiBundlePlugin(options) {
           const filename = file_versioning
             ? `${jsOptions.filename}-${getUnique()}.js`
             : `${jsOptions.filename}.js`;
+          const outDir = jsOptions.outDir ? jsOptions.outDir : 'dist'
           const jsBundle = await bundleAssets(
             jsOptions.entryPoints,
             filename,
-            false
+            false,
+            outDir
           );
           if (file_versioning) {
             const integrity = generateHash(jsBundle);
@@ -94,7 +96,7 @@ export default function multiBundlePlugin(options) {
   };
 }
 
-async function bundleAssets(files, filename, isCss = false, outDir = "dist") {
+async function bundleAssets(files, filename, isCss = false, outDir) {
   const cwd = process.cwd();
   const fileContents = await Promise.all(
     files.map((filePath) =>
