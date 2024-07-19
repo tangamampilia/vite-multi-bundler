@@ -94,7 +94,7 @@ export default function multiBundlePlugin(options) {
   };
 }
 
-async function bundleAssets(files, filename, isCss = false, outDir) {
+async function bundleAssets(files, filename, isCss = false, outDir = "dist") {
   const cwd = process.cwd();
   const fileContents = await Promise.all(
     files.map((filePath) =>
@@ -114,7 +114,7 @@ async function bundleAssets(files, filename, isCss = false, outDir) {
     : (await minify(bundledCode)).code;
 
   const distFilePath = path.join(process.cwd(), filename);
-  await fs.promises.writeFile(distFilePath, minifiedCode);
+  await fs.promises.writeFile(distFilePath, outDir, minifiedCode);
   return minifiedCode;
 }
 
