@@ -54,7 +54,7 @@ export default function multiBundlePlugin(options) {
           const filename = file_versioning
             ? `${cssOptions.filename}-${getUnique()}.css`
             : `${cssOptions.filename}.css`;
-          const outDir = jsOptions.outDir ? jsOptions.outDir : 'dist'
+          const outDir = cssOptions.outDir ? cssOptions.outDir : 'dist'
           const cssBundle = await bundleAssets(
             cssOptions.entryPoints,
             filename,
