@@ -113,7 +113,7 @@ async function bundleAssets(files, filename, isCss = false, outDir) {
     ? await minifyCss(bundledCode)
     : (await minify(bundledCode)).code;
 
-  const distFilePath = path.join(process.cwd(), "dist", filename);
+  const distFilePath = path.join(process.cwd(), filename);
   await fs.promises.writeFile(distFilePath, minifiedCode);
   return minifiedCode;
 }
