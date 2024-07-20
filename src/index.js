@@ -13,7 +13,6 @@ export default function multiBundlePlugin(options) {
   return {
     name: "multi-bundle-plugin",
     async generateBundle(outputOptions, bundle) {
-      if (isExecuted) return;
 
       if (js && Array.isArray(js)) {
         for (const jsOptions of js) {
